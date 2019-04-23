@@ -1,2 +1,7 @@
-# proyectosJavaZM
-proyectos, tps, parciales etc
+#ProyectosJavaZM
+
+<img src="/img/logo.png" alt="My cool logo"/>
+
+
+
+# Proyectos, tps, parciales etc
