@@ -31,5 +31,13 @@ public class Cliente {
 		Apellido = apellido;
 	}
 	
+	public String mostrarCliente(){
+		return "INFO CLIENTE\n[ID CLIENTE=" + idCliente + ", NOMBRE CLIENTE=" + Nombre + "APELLIDO CLIENTE=" + Apellido +"]";
+	}
+	public String mostrarNombreCliente(){
+		return " [NOMBRE  = " + Nombre + "APELLIDO"+ Apellido + "]";
+	}
+	
+	
 
 }

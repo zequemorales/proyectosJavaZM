@@ -1,6 +1,7 @@
 package clases;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public abstract class Producto {
 
@@ -60,10 +61,12 @@ public abstract class Producto {
 
 	 public void entregar(){
 		 this.entregado=true;
+		 setStock(stock-1);
 	 }
 
 	 public void devolver(){
 		 this.entregado=false;
+		 setStock(stock+1);
 	 }
 
 	 public boolean isEntregado(){
@@ -73,8 +76,21 @@ public abstract class Producto {
 	
 	abstract public int comparar(Producto a);
 	
-	public void agregarRegistro(){
-		
+	
+	public void agregarRegistroPelicula(Date fecha, Cliente c){
+		String e = "[El Cliente ID=" + c.getIdCliente()+ c.getNombre() + c.getApellido() + "alquilo la pelicula el dia" + fecha + ". ]";
+		RegistroDeAlquileres.add(e);
+	}
+	public void agregarRegistroAlqJuego(Date fecha, Cliente c){
+		String e = "[El Cliente ID=" + c.getIdCliente()+ c.getNombre() + c.getApellido() + "alquilo el juego el dia" + fecha + ". ]";
+		RegistroDeAlquileres.add(e);
+	}
+	
+	public void listarRegistro(){
+		for (String registro : RegistroDeAlquileres)
+		{
+			System.out.println(registro);
+		}
 	}
 	
 
