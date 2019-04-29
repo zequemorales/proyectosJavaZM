@@ -7,24 +7,25 @@ public abstract class Producto {
 
 	private int idProducto;
 	private String titulo;
-	boolean entregado;
 	private String genero;
 	private ArrayList<String> RegistroDeAlquileres;
-	private int stock;
+	private ArrayList<Copia> copias;
 
-	public Producto(int idProducto, String titulo, String genero, int stock) {
+	public Producto (int idProducto, String titulo, String genero) {
 		setIdProducto(idProducto);
 		setTitulo(titulo);
-		this.entregado = false;
 		setGenero(genero);
-		setStock(stock);
-		RegistroDeAlquileres = new ArrayList<String>();
+		RegistroDeAlquileres = new ArrayList<>();
+		copias = new ArrayList<>();
 
+	}
+	
+	public void agregarCopia(Copia co) {
+		copias.add(co);
 	}
 
 	public String imprimir() {
-		return "Elemento [ID PRODUCTO= " + getIdProducto() + "TITULO= " + getTitulo() + "ENTREGADO= " + isEntregado()
-				+ "GENERO= " + getGenero() + "STOCK= " + getStock() + "]";
+		return "\nElemento \n- ID PRODUCTO= " + getIdProducto() + "\n- TITULO= " + getTitulo() + "\n- GENERO= " + getGenero();
 	}
 
 	public int getIdProducto() {
@@ -51,47 +52,23 @@ public abstract class Producto {
 		this.genero = genero;
 	}
 
-	public int getStock() {
-		return stock;
-	}
 
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
-
-	 public void entregar(){
-		 this.entregado=true;
-		 setStock(stock-1);
-	 }
-
-	 public void devolver(){
-		 this.entregado=false;
-		 setStock(stock+1);
-	 }
-
-	 public boolean isEntregado(){
-		 return entregado; // si devuelve false esta en el videoclub y si esta true esta prestado 
-	 }
-	 
-	
-	abstract public int comparar(Producto a);
-	
-	
-	public void agregarRegistroPelicula(Date fecha, Cliente c){
-		String e = "[El Cliente ID=" + c.getIdCliente()+ c.getNombre() + c.getApellido() + "alquilo la pelicula el dia" + fecha + ". ]";
+	public void agregarRegistroPelicula(Date fecha, Cliente c) {
+		String e = "[El Cliente ID=" + c.getIdCliente() + c.getNombre() + c.getApellido() + "alquilo la pelicula el dia"
+				+ fecha + ". ]";
 		RegistroDeAlquileres.add(e);
 	}
-	public void agregarRegistroAlqJuego(Date fecha, Cliente c){
-		String e = "[El Cliente ID=" + c.getIdCliente()+ c.getNombre() + c.getApellido() + "alquilo el juego el dia" + fecha + ". ]";
+
+	public void agregarRegistroAlqJuego(Date fecha, Cliente c) {
+		String e = "[El Cliente ID=" + c.getIdCliente() + c.getNombre() + c.getApellido() + "alquilo el juego el dia"
+				+ fecha + ". ]";
 		RegistroDeAlquileres.add(e);
 	}
-	
-	public void listarRegistro(){
-		for (String registro : RegistroDeAlquileres)
-		{
+
+	public void listarRegistro() {
+		for (String registro : RegistroDeAlquileres) {
 			System.out.println(registro);
 		}
 	}
-	
 
 }

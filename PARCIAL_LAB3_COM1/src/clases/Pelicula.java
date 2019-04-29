@@ -1,15 +1,16 @@
 package clases;
 
+
 public class Pelicula extends Producto {
+
 	private int duracion;
 	private String creador;
 
-	public Pelicula(int idProducto, String titulo, String genero, int stock, int duracion, String creador) {
-		super(idProducto, titulo, genero, stock);
-		setCreador(creador);
+	public Pelicula(int idProducto, String titulo, String genero, int duracion, String creador) {
+		super(idProducto, titulo, genero);
 		setDuracion(duracion);
+		setCreador(creador);
 	}
-	
 	
 
 	public int getDuracion() {
@@ -17,11 +18,9 @@ public class Pelicula extends Producto {
 	}
 
 	@Override
-	public String toString() {
+	public String imprimir() {
 		return "Pelicula [duracion=" + getDuracion() + ", creador=" + getCreador() + "]" + super.imprimir();
 	}
-
-
 
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
@@ -33,12 +32,6 @@ public class Pelicula extends Producto {
 
 	public void setCreador(String creador) {
 		this.creador = creador;
-	}
-
-	@Override
-	public int comparar(Producto a) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }
