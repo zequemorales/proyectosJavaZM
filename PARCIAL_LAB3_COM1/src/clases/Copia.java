@@ -1,24 +1,31 @@
 package clases;
 
 public class Copia {
-	private int idPelicula;
+	private int idProducto;
 	private boolean entregado=false;
 	private String titulo;
-	private int id;
+	private int idCopia;
 	
 
-	public Copia(int idPelicula, String titulo, int id) {
+	public Copia(int idPelicula, String titulo, int idCopia) {
 		setIdPelicula(idPelicula);
 		setTitulo(titulo);
-		setId(id);
+		setIdCopia(idCopia);
+	}
+	
+
+	public String imprimirCopia() {
+		return "Copia [idPelicula=" + idProducto + ", entregado=" + entregado + ", titulo=" + titulo + ", idCopia="
+				+ idCopia + "]";
 	}
 
+
 	public int getIdPelicula() {
-		return idPelicula;
+		return idProducto;
 	}
 
 	public void setIdPelicula(int idPelicula) {
-		this.idPelicula = idPelicula;
+		this.idProducto = idPelicula;
 	}
 
 	public String getTitulo() {
@@ -29,12 +36,12 @@ public class Copia {
 		this.titulo = titulo;
 	}
 
-	public int getId() {
-		return id;
+	public int getIdCopia() {
+		return idCopia;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdCopia(int idCopia) {
+		this.idCopia = idCopia;
 	}
 
 	public void entregar() {
@@ -44,7 +51,6 @@ public class Copia {
 	public void devolver() {
 		this.entregado = false;
 	}
-
 	
 	public boolean isEntregado() {
 		return entregado; // si devuelve false esta en el videoclub y si esta

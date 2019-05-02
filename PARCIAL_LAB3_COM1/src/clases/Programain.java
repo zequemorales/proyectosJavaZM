@@ -3,6 +3,8 @@ package clases;
 import java.util.Date;
 import java.util.Scanner;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.DefaultValueLoaderDecorator;
+
 public class Programain {
 	
 	public static  Scanner teclado = new Scanner(System.in);
@@ -28,7 +30,6 @@ public class Programain {
 		c2=crearCliente(DonVideo);
 		
 		p1=crearProductoPelicula(DonVideo);
-		
 		p6=crearProductoVideojuego(DonVideo);
 		
 		System.out.println("INGRESE LA CANTIDAD DE COPIAS");
@@ -36,16 +37,43 @@ public class Programain {
 		cantCopias=teclado.nextInt();
 		DonVideo.agregarCopias(p1, cantCopias);
 		
+		p1.listarCopias();
+		
+		System.out.println("INGRESE EL PRODUCTO A ALQUILAR");
+		int idProducto;
+		idProducto=teclado.nextInt();
+		
+		System.out.println("INGRESE EL ID DEL CLIENTE QUE ALQUILA EL PRODUCTO");
+		int idCliente;
+		idCliente=teclado.nextInt();
+		
+		DonVideo.AlquilarProducto(idProducto, fecha, idCliente);
+		
+		DonVideo.listarCopias(idProducto);
+		
+		System.out.println("INGRESE EL PRODUCTO A ALQUILAR");
+		idProducto=teclado.nextInt();
+		
+		System.out.println("INGRESE EL ID DEL CLIENTE QUE ALQUILA EL PRODUCTO");
+		idCliente=teclado.nextInt();
+		
+		DonVideo.AlquilarProducto(idProducto, fecha, idCliente);
+		DonVideo.listarCopias(idProducto);
+		
+		DonVideo.listarReg(1);
+		DonVideo.listarReg(2);
 
-	
-		System.out.println("************************************");
 		
-		DonVideo.listarClientes();
-		System.out.println("************************************");
-		
-		DonVideo.eliminarCliente(10);
-		System.out.println("************************************");
-		DonVideo.listarClientes();
+
+//	
+//		System.out.println("************************************");
+//		
+//		DonVideo.listarClientes();
+//		System.out.println("************************************");
+//		
+//		DonVideo.eliminarCliente(10);
+//		System.out.println("************************************");
+//		DonVideo.listarClientes();
 		
 		
 

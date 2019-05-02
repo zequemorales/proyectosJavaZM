@@ -1,6 +1,7 @@
 package clases;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class VideoClub {
@@ -12,45 +13,53 @@ public class VideoClub {
 		ListaDeProductos = new ArrayList<Producto>();
 		ListadoDeClientes = new ArrayList<Cliente>();
 	}
-	
-	
-	public void agregarCopias(Producto p , int cantidadDeCopias){
+
+	public boolean agregarCopias(Producto p, int cantidadDeCopias) {
+		boolean flag = false;
 		int numAle;
-		for(int i=0;i<=cantidadDeCopias;i++){
-			Copia copy = new Copia(p.getIdProducto(), p.getTitulo() ,numAle = (int) (Math.random() * 1000) + 1);
-					p.agregarCopia(copy);
+		for (int i = 0; i <= cantidadDeCopias; i++) {
+			Copia copy = new Copia(p.getIdProducto(), p.getTitulo(), numAle = (int) (Math.random() * 1000) + 1);
+			if (p.agregarCopia(copy)) {
+				flag = true;
+			}
 		}
-		
-		
+		return flag; // si devulve true es que se agrego correctamente
 	}
 
-	public boolean agregarProducto(Producto p) {
-		boolean flag = false;
+	public boolean agregarProducto(Producto p) { // Si devuelve false un
+													// producto con el mismo id
+													// se encuentra en la lista
+		boolean flag = true;
 		for (int i = 0; i < ListaDeProductos.size(); i++) {
 			if (ListaDeProductos.get(i).getIdProducto() == p.getIdProducto()) {
-				System.out.println("Un producto con el mismo ID ya se encuentra en la lista");
-				flag = true;
+				// System.out.println("Un producto con el mismo ID ya se
+				// encuentra en la lista");
+				flag = false;
 			}
 		}
-		if (!flag) {
+		if (flag) {
 			ListaDeProductos.add(p);
 		}
-		return flag;
+		return flag; // si es true se agrego correctamente
 
 	}
 
-	public void agregarCliente(Cliente c) {
+	public boolean agregarCliente(Cliente c) { // Si devuelve false un cliente
+												// con el mismo id se encuentra
+												// en la lista
 
-		boolean flag = false;
+		boolean flag = true;
 		for (int i = 0; i < ListadoDeClientes.size(); i++) {
 			if (ListadoDeClientes.get(i).getIdCliente() == c.getIdCliente()) {
-				System.out.println("Un cliente con el mismo ID ya se encuentra en la lista");
-				flag = true;
+				// System.out.println("Un cliente con el mismo ID ya se
+				// encuentra en la lista");
+				flag = false;
 			}
 		}
-		if (!flag) {
+		if (flag) {
 			ListadoDeClientes.add(c);
 		}
+		return flag;
 
 	}
 
@@ -60,13 +69,32 @@ public class VideoClub {
 		}
 	}
 
+	public void listarPeliculas() {
+		for (Producto p : ListaDeProductos) {
+			if (p instanceof Pelicula) {
+				System.out.println(p.imprimir());
+			}
+		}
+
+	}
+
+	public void listarVideoJuegos() {
+		for (Producto p : ListaDeProductos) {
+			if (p instanceof VideoJuego) {
+				System.out.println(p.imprimir());
+			}
+		}
+	}
+
 	public void listarClientes() {
 		for (Cliente c : ListadoDeClientes) {
 			System.out.println(c.mostrarCliente());
 		}
 	}
 
-	public void eliminarProducto(int idProduc) {
+	public boolean eliminarProducto(int idProduc) { /// Si Devuelve true se
+													/// elimina correctamente
+		// y si devuelve false es que no se encontro el producto o hubo un error
 
 		boolean flag = false;
 		for (int i = 0; i < ListaDeProductos.size(); i++) {
@@ -76,30 +104,98 @@ public class VideoClub {
 			}
 
 		}
-		if (!flag) {
-			System.out.println("\nNo se encontro el Producto");
 
-		}
+		return flag;
 	}
 
-	public void eliminarCliente(int idClient) {
+	public boolean eliminarCliente(int idClient) { // si devuelve true es que se
+													// elimino correctamente
 		boolean flag = false;
 		for (int i = 0; i < ListadoDeClientes.size(); i++) {
 			if (ListadoDeClientes.get(i).getIdCliente() == idClient) {
 				ListadoDeClientes.remove(i);
 				flag = true;
 			}
-
 		}
-		if (!flag) {
-			System.out.println("\nNo se encontro el Cliente");
+		return flag;
+	}
 
+	public Cliente devuelveCliente(int idCliente) {
+		Cliente c = null;
+		for (int i = 0; i < ListadoDeClientes.size(); i++) {
+			if (ListadoDeClientes.get(i).getIdCliente() == idCliente) {
+				c = ListadoDeClientes.get(i);
+			}
 		}
+		return c;
+	}
+
+	public boolean AlquilarProducto(int idProducto, Date fecha, int idCliente) {
+		boolean flag = false;
+
+		for (int i = 0; i < ListaDeProductos.size(); i++) {
+			if (!flag) {
+				if (ListaDeProductos.get(i).getIdProducto() == idProducto) {
+					ListaDeProductos.get(i).darCopiaParaAlquilar();
+					if (ListaDeProductos.get(i) instanceof Pelicula) {
+						ListaDeProductos.get(i).agregarRegistroPelicula(fecha, addreg(idCliente));
+
+					}
+					if (ListaDeProductos.get(i) instanceof VideoJuego) {
+						ListaDeProductos.get(i).agregarRegistroAlqJuego(fecha, addreg(idCliente));
+
+					}
+
+					flag = true;
+				}
+			}
+		}
+		return flag; //si devuelve true se alquilo correctamente
+
+	}
+
+	public Cliente addreg(int idC) { // Si devuelve false un
+		Cliente aux=null;
+	
+		
+		for (int i = 0; i < ListaDeProductos.size(); i++) {
+			if (ListadoDeClientes.get(i).getIdCliente() == ListadoDeClientes.get(i).getIdCliente()) {
+				aux=ListadoDeClientes.get(i);
+			}
+		}
+		
+		return aux; // si es true se agrego correctamente
+
 	}
 	
-	public void AlquilarProducto(Producto p ){
-		
-		
+	public void listarCopias(int idProducto) {
+		boolean flag = false;
+
+		for (int i = 0; i < ListaDeProductos.size(); i++) {
+			if (!flag) {
+				if (ListaDeProductos.get(i).getIdProducto() == idProducto) {
+					ListaDeProductos.get(i).listarCopias();
+					flag=true;
+				}
+			}
+		}
+
 	}
+	
+	public void listarReg(int idProducto) {
+		boolean flag = false;
+
+		for (int i = 0; i < ListaDeProductos.size(); i++) {
+			if (!flag) {
+				if (ListaDeProductos.get(i).getIdProducto() == idProducto) {
+					ListaDeProductos.get(i).listarRegistro();
+					flag=true;
+				}
+			}
+		}
+
+	}
+	
+	
 
 }

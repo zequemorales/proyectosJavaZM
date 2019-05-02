@@ -19,7 +19,7 @@ public class Pelicula extends Producto {
 
 	@Override
 	public String imprimir() {
-		return "Pelicula [duracion=" + getDuracion() + ", creador=" + getCreador() + "]" + super.imprimir();
+		return "Pelicula [duracion=" + getDuracion() + ", creador=" + getCreador() + "]\n" + super.imprimir();
 	}
 
 	public void setDuracion(int duracion) {

@@ -10,22 +10,40 @@ public abstract class Producto {
 	private String genero;
 	private ArrayList<String> RegistroDeAlquileres;
 	private ArrayList<Copia> copias;
+	private boolean entregado;
 
-	public Producto (int idProducto, String titulo, String genero) {
+	public Producto(int idProducto, String titulo, String genero) {
 		setIdProducto(idProducto);
 		setTitulo(titulo);
 		setGenero(genero);
 		RegistroDeAlquileres = new ArrayList<>();
 		copias = new ArrayList<>();
-
+		setEntregado(false);
 	}
-	
-	public void agregarCopia(Copia co) {
-		copias.add(co);
+
+	public boolean agregarCopia(Copia co) {
+		boolean flag = false;
+		if (copias.add(co)) {
+			flag = true;
+
+		}
+		return false;
+	}
+
+	public int devuelveStock() {
+		int stock = 0;
+		for (int i = 0; i <= copias.size(); i++) {
+			if (!copias.get(i).isEntregado()) {
+				stock++;
+			}
+		}
+		return stock;
+
 	}
 
 	public String imprimir() {
-		return "\nElemento \n- ID PRODUCTO= " + getIdProducto() + "\n- TITULO= " + getTitulo() + "\n- GENERO= " + getGenero();
+		return "\nElemento \n- ID PRODUCTO= " + getIdProducto() + "\n- TITULO= " + getTitulo() + "\n- GENERO= "
+				+ getGenero();
 	}
 
 	public int getIdProducto() {
@@ -52,8 +70,31 @@ public abstract class Producto {
 		this.genero = genero;
 	}
 
+	public void setEntregado(boolean entregado) {
+		this.entregado = entregado;
+	}
 
-	public void agregarRegistroPelicula(Date fecha, Cliente c) {
+	public boolean isEntregado(boolean entregado) {
+		return entregado;
+
+	}
+
+	public void darCopiaParaAlquilar() {
+		boolean flag = false;
+
+		for (int i = 0; i <= copias.size(); i++) {
+			if (!flag) {
+				if (!copias.get(i).isEntregado()) {
+					copias.get(i).entregar();
+					flag = true;
+				}
+			}
+		}
+
+	}
+
+	public void agregarRegistroPelicula(Date fecha, Cliente c ) {
+		
 		String e = "[El Cliente ID=" + c.getIdCliente() + c.getNombre() + c.getApellido() + "alquilo la pelicula el dia"
 				+ fecha + ". ]";
 		RegistroDeAlquileres.add(e);
@@ -68,6 +109,11 @@ public abstract class Producto {
 	public void listarRegistro() {
 		for (String registro : RegistroDeAlquileres) {
 			System.out.println(registro);
+		}
+	}
+	public void listarCopias() {
+		for (Copia co : copias) {
+			System.out.println(co.imprimirCopia());
 		}
 	}
 
