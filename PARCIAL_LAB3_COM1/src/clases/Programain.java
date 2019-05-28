@@ -10,7 +10,7 @@ public class Programain {
 	public static  Scanner teclado = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		Producto p1 =null;
+		Producto p1 = new Pelicula(0, null, null, 0, null) ;
 		Producto p2 =null;
 		Producto p3 =null;
 		Producto p4 =null;
