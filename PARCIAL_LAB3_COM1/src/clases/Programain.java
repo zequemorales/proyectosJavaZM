@@ -27,10 +27,10 @@ public class Programain {
 		System.out.println("************************************");
 		
 		c1=crearCliente(DonVideo);
-		c2=crearCliente(DonVideo);
+//		c2=crearCliente(DonVideo);
 		
 		p1=crearProductoPelicula(DonVideo);
-		p6=crearProductoVideojuego(DonVideo);
+//		p6=crearProductoVideojuego(DonVideo);
 		
 		System.out.println("INGRESE LA CANTIDAD DE COPIAS");
 		int cantCopias;
