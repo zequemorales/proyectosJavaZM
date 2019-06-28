@@ -5,9 +5,31 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class Hangar<K, V> {
-
+	
+	private String tipoAvion;
+	
 	private HashMap<K, V> listaMapa;
+	
+	
 
+	public Hangar(String tipoAvion) {
+		setTipoAvion(tipoAvion);
+		listaMapa=new HashMap<>();
+	}
+
+
+	public String getTipoAvion() {
+		return tipoAvion;
+	}
+
+
+	public void setTipoAvion(String tipoAvion) {
+		this.tipoAvion = tipoAvion;
+	}
+	
+	public int cantAviones(){
+		return listaMapa.size();
+	}
 	/**
 	 * Existe
 	 */
@@ -15,13 +37,15 @@ public class Hangar<K, V> {
 	public boolean existeEnMapa(K clave) {
 		return listaMapa.containsKey(clave);
 	}
+	
+
 
 	/**
 	 * Agrega un elemento
 	 * 
 	 * @return true si se agrego y false si no.
 	 */
-	public boolean agregar(K clave, V valor) {
+	public boolean agregarAvionAlHangar(K clave, V valor) {
 		boolean flag = false;
 		if (!existeEnMapa(clave)) {
 			listaMapa.put(clave, valor);
@@ -59,13 +83,13 @@ public class Hangar<K, V> {
 	 * @return en un String toda la coleccion
 	 */
 
-	public String listar() {
+	public String toString() {
 		Iterator<Map.Entry<K, V>> entradas = listaMapa.entrySet().iterator();
 		StringBuilder str = new StringBuilder();
-		str.append("( Clave |" + " Valor )" + "\r\n");
+		str.append("( Clave |" + " Valor )" + "\n");
 		while (entradas.hasNext()) {
 			Map.Entry<K, V> entrada = entradas.next();
-			str.append("(" + entrada.getKey() + " |" + entrada.getValue() + ")");
+			str.append("\n(" + entrada.getKey() + " |" + entrada.getValue() + ")");
 		}
 		return str.toString();
 	}

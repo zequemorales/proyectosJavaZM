@@ -2,6 +2,7 @@ package ventanas;
 import java.awt.Frame;
 
 import javax.swing.*;
+import java.awt.BorderLayout;
 
 public class CreandoMarcos {
 
@@ -11,6 +12,17 @@ public class CreandoMarcos {
 		marco1.setVisible(true);
 		
 		marco1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	
+		JList lista = new JList();
+		DefaultListModel modelo = new DefaultListModel();
+		for(int i = 1; i<=10; i++){
+		        modelo.addElement(i);
+		}
+		lista.setModel(modelo);
+		
+		marco1.getContentPane().add(lista, BorderLayout.CENTER);
+	
 		
 
 	}
@@ -31,6 +43,9 @@ class miMarco extends JFrame {
 		
 		
 		setTitle("Mi Ventana");
+		
+
+		
 		
 	}
 	
