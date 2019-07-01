@@ -1,5 +1,6 @@
 package programa;
 import clases.*;
+import excepciones.AeropuertoFULLExcepcion;
 
 public class Programain {
 
@@ -11,6 +12,7 @@ public class Programain {
 		AvionDeCarga avionCarga1 = new AvionDeCarga(3, "G200", "boeing", 1000, "Motor",10000);
 		
 		AvionMilitar avionMilit1 = new AvionMilitar(6, "a300", "Airbus", 2000, "motor", 100, 1, 10000);
+		AvionMilitar avionMilit2 = new AvionMilitar(7, "a300", "Airbus", 2000, "motor", 100, 2, 10000);
 		
 		AvionPrivado avionPriv1 = new AvionPrivado(8, "M1", "BOEING", 1000, "MOTOR", 20, true, "avion123");
 		AvionPrivado avionPriv2 = new AvionPrivado(10, "M2", "BOEING", 1000, "MOTOR", 20, true, "avion123");
@@ -36,16 +38,43 @@ public class Programain {
 		
 		
 		System.out.println("AGREGO PRIV 1");
-		astorMDQ.agregarAvion(HangarPrivado, avionPriv1);
-		System.out.println("AGREGO PRIV 2");
-		astorMDQ.agregarAvion(HangarPrivado, avionPriv2);
-		System.out.println("AGREGO com 1");
-		astorMDQ.agregarAvion(HangarComercial, avionCom1);
-		System.out.println("AGREGO milit 1");
-		astorMDQ.agregarAvion(HangarMilitar, avionMilit1);
-		System.out.println("AGREGO carga 1");
-		astorMDQ.agregarAvion(HangarCarga, avionCarga1);
-		
+		try {
+			astorMDQ.agregarAvion(HangarCarga, avionCarga1);
+		} catch (AeropuertoFULLExcepcion e) {
+			// TODO Bloque catch generado automáticamente
+			System.out.println(e.getMessage());
+		}
+		try {
+			astorMDQ.agregarAvion(HangarComercial, avionCom1);
+		} catch (AeropuertoFULLExcepcion e) {
+			// TODO Bloque catch generado automáticamente
+			System.out.println(e.getMessage());
+			}
+		try {
+			astorMDQ.agregarAvion(HangarMilitar, avionMilit1);
+		} catch (AeropuertoFULLExcepcion e) {
+			// TODO Bloque catch generado automáticamente
+			System.out.println(e.getMessage());
+		}
+		try {
+			astorMDQ.agregarAvion(HangarMilitar, avionMilit2);
+		} catch (AeropuertoFULLExcepcion e) {
+			// TODO Bloque catch generado automáticamente
+			System.out.println(e.getMessage());
+		}
+		try {
+			astorMDQ.agregarAvion(HangarPrivado, avionPriv1);
+		} catch (AeropuertoFULLExcepcion e) {
+			// TODO Bloque catch generado automáticamente
+			System.out.println(e.getMessage());
+		}
+		try {
+			astorMDQ.agregarAvion(HangarPrivado, avionPriv2);
+		} catch (AeropuertoFULLExcepcion e) {
+			// TODO Bloque catch generado automáticamente
+e.printStackTrace();
+		}
+	
 		
 		System.out.println(astorMDQ.contarAviones());
 		

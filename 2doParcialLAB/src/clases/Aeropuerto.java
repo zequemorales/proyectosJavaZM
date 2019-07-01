@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import excepciones.AeropuertoFULLExcepcion;
 import interfaces.IListados;
 
@@ -64,21 +67,59 @@ public class Aeropuerto{
 		return flag;
 	}
 	
-	public <K, V> void agregarAvion(Hangar <K,V> h ,  Avion a){
-		try {
+
+//	public void agregarAvion(String key ,  Avion a){
+//		try {
+//			if(contarAviones()<getCapacidadDeOperacion()){
+//				ListadoHangares.get(key).agregarAvionAlHangar(a.getIdAvion(), a);
+//			}
+//			else
+//				throw new AeropuertoFULLExcepcion("AEROPUERTO FULL") ;
+//		
+//		} catch (AeropuertoFULLExcepcion e) {
+//			
+//			System.out.println(e.getMessage());
+//
+//		}
+//		
+//	}
+	
+	public void agregarAvion(Hangar<Integer, AvionComercial> h,  AvionComercial a) throws AeropuertoFULLExcepcion{
+	
 			if(contarAviones()<getCapacidadDeOperacion()){
-				ListadoHangares.get(h.getTipoAvion()).agregarAvionAlHangar(a.getIdAvion(), a);
+				h.agregarAvionAlHangar(a.getIdAvion(), a);
 			}
 			else
-				throw new AeropuertoFULLExcepcion("AEROPUERTO FULL") ;
-		
-		} catch (AeropuertoFULLExcepcion e) {
-			
-			System.out.println(e.getMessage());
-
+				throw new AeropuertoFULLExcepcion("AEROPUERTO FULL") ;	
+	}
+	
+	public void agregarAvion(Hangar<Integer, AvionDeCarga> h,  AvionDeCarga a) throws AeropuertoFULLExcepcion{
+		if(contarAviones()<getCapacidadDeOperacion()){
+			h.agregarAvionAlHangar(a.getIdAvion(), a);
 		}
+		else
+			throw new AeropuertoFULLExcepcion("AEROPUERTO FULL") ;	
 		
 	}
+	public void agregarAvion(Hangar<Integer, AvionMilitar> h,  AvionMilitar a) throws AeropuertoFULLExcepcion{
+		if(contarAviones()<getCapacidadDeOperacion()){
+			h.agregarAvionAlHangar(a.getIdAvion(), a);
+		}
+		else
+			throw new AeropuertoFULLExcepcion("AEROPUERTO FULL") ;	
+		
+	}
+	
+	public void agregarAvion(Hangar<Integer, AvionPrivado> h,  AvionPrivado a) throws AeropuertoFULLExcepcion{
+		if(contarAviones()<getCapacidadDeOperacion()){
+			h.agregarAvionAlHangar(a.getIdAvion(), a);
+		}
+		else
+			throw new AeropuertoFULLExcepcion("AEROPUERTO FULL") ;	
+		
+	}
+	
+
 	
 	public String listarTodosLosHangares(){
 		return toString();
@@ -135,6 +176,22 @@ public class Aeropuerto{
 		return ListadoHangares.get(clave);
 		}
 	
+	public String getFormatoJSON()
+	{
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject = super.getFormatoJSON();
+			jsonObject.put("Sistema de armas", getSistemaArmasString());
+			jsonObject.put("Cantidad de balas", getCantBalas());
+	
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonObject.toString();
+		
+	}
 	
 	
 

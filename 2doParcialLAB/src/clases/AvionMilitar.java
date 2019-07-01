@@ -1,5 +1,9 @@
 package clases;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import interfaces.ILogin;
 
 public class AvionMilitar extends Avion implements ILogin {
@@ -58,6 +62,23 @@ public class AvionMilitar extends Avion implements ILogin {
 		else{
 			return "usuario o contra incorrecto";
 		}
+		
+	}
+	
+	public JSONObject getFormatoJSON()
+	{
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject = super.getFormatoJSON();
+			jsonObject.put("Sistema de armas", getSistemaArmasString());
+			jsonObject.put("Cantidad de balas", getCantBalas());
+	
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonObject;
 		
 	}
 

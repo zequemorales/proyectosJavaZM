@@ -2,6 +2,10 @@ package clases;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import interfaces.IComida;
 import interfaces.IListados;
 import interfaces.IMantas;
@@ -86,6 +90,27 @@ public class AvionComercial extends Avion implements IListados, IComida, IMantas
 	@Override
 	public String servirComida() {
 		return "Se sirvio la comida";
+	}
+	
+	public String getFormatoJSON()
+	{
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject = super.getFormatoJSON();
+			jsonObject.put("cantidad de Azafatas", getCantidadAzafatas());
+			JSONArray jsonarrayListadoServicios = new JSONArray();
+			for(String servicio : listaDeServicios){
+				
+				jsonarrayListadoServicios.put(servicio);
+			}
+			jsonObject.put("Lista Servicios", jsonarrayListadoServicios);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonObject.toString();
+		
 	}
 	
 }

@@ -2,6 +2,10 @@ package clases;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import interfaces.ICarga;
 import interfaces.IListados;
 import interfaces.ILogin;
@@ -99,8 +103,28 @@ public class AvionDeCarga extends Avion  implements IListados , ILogin, ICarga{
 
 	@Override
 	public String toString() {
-		return super.toString() + "AvionDeCarga [cantidadDeKG=" + cantidadDeKG + ", listaDePosiblesProductos=" + listar()
+		return super.toString() + "AvionDeCarga [cantidadDeKG = " + cantidadDeKG + ", listaDePosiblesProductos = " + listar()
 				+ "]";
+	}
+	
+	public JSONObject getFormatoJSON()
+	{
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject = super.getFormatoJSON();
+			jsonObject.put("cantidad de kg", getCantidadDeKG());
+			JSONArray jsonarrayListadoProductos = new JSONArray();
+			for(String producto : listaDePosiblesProductos){
+				jsonarrayListadoProductos.put(producto);
+			}
+			jsonObject.put("Lista Productos", jsonarrayListadoProductos);
+		} catch (JSONException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return jsonObject;
+		
 	}
 
 }

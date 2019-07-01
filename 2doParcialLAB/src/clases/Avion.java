@@ -1,5 +1,8 @@
 package clases;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import interfaces.IAviones;
 
 public abstract class Avion implements IAviones {
@@ -84,6 +87,26 @@ public abstract class Avion implements IAviones {
 
 	public String aterrizar() {
 		return "Atarrizando";
+	}
+	
+	
+	public String getFormatoJSON()
+	{
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject.put("id Avion", getIdAvion());
+			jsonObject.put("nombre Modelo", getNombreDeModelo());
+			jsonObject.put("Marca", getMarca());
+			jsonObject.put("Capacidad Combustible", getCapacidadCombustible());
+			jsonObject.put("Tipo Motor", getTipoMotor());
+			jsonObject.put("Cantidad de Asientos", getCantidadAsientos());
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jsonObject;
+		
 	}
 
 }
