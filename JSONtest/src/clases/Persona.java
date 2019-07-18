@@ -80,6 +80,7 @@ public class Persona {
 	public JSONObject getFormatoJSON() throws JSONException{
 		
 		JSONObject objetoJSON = new JSONObject();
+	
 		
 		objetoJSON.put("Nombre", getNombre());
 		objetoJSON.put("Apellido", getApellido());

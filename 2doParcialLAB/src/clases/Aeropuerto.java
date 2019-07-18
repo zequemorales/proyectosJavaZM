@@ -115,7 +115,7 @@ public class Aeropuerto{
 			h.agregarAvionAlHangar(a.getIdAvion(), a);
 		}
 		else
-			throw new AeropuertoFULLExcepcion("AEROPUERTO FULL") ;	
+ 
 		
 	}
 	
